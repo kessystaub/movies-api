@@ -24,7 +24,7 @@ class MoviesController < ApplicationController
 
         render json: { message: "Importação de arquivo CSV realizada com sucesso!" }, status: :ok
       rescue StandardError => e
-        render json: { error: "Erro ao processar o arquivo: #{e.message}" }, status: :unprocessable_entity
+        render json: { error: "Erro ao importar: #{e.message}" }, status: :unprocessable_entity
       end
     end
   end
