@@ -2,8 +2,7 @@ source "https://rubygems.org"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.2.2"
-gem "rspec-rails", "~> 5.0"
-gem "factory_bot_rails"
+
 # Use sqlite3 as the database for Active Record
 gem "sqlite3", ">= 1.4"
 # Use the Puma web server [https://github.com/puma/puma]
@@ -32,6 +31,12 @@ gem "bootsnap", require: false
 # gem "rack-cors"
 
 group :development, :test do
+  gem "rspec-rails",               "6.1.4"
+  gem "rubocop-factory_bot",       "2.26.1"
+  gem "rubocop-rspec_rails",       "2.30.0"
+  gem "guard-rspec",               "4.7.3"
+  gem "spring-commands-rspec",     "1.0.4"
+
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
 
