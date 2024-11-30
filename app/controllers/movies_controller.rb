@@ -1,11 +1,17 @@
 require "csv"
 class MoviesController < ApplicationController
   def index
-    movies = Movie.all.order(:published_at)
-    render json: movies
-  end
+    movies_query = MoviesQuery.new
+    movies = movies_query.by_year(params[:year])
+                          .by_genre(params[:genre])
+                          .by_country(params[:country])
+                          .by_title(params[:title])
+                          .by_description(params[:description])
+                          .by_published_at(params[:published_at])
+                          .call
 
-  # GET /movies?year=2023&genre=Action&country=USA&title=Avengers
+    render json: movies.as_json(only: [ :id, :title, :genre, :year, :country, :published_at, :description ])
+  end
 
   def import_csv
     if params[:file].present?
@@ -16,10 +22,10 @@ class MoviesController < ApplicationController
         csv.each do |row|
           Movie.find_or_create_by!(
             title: row["title"],
-            genre: row["genre"],
-            year: row["year"],
+            genre: row["listed_in"],
+            year: row["release_year"],
             country: row["country"],
-            published_at: row["published_at"],
+            published_at: row["date_added"] ? Date.parse(row["date_added"]) : nil,
             description: row["description"]
           )
         end
