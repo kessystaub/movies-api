@@ -3,12 +3,12 @@ class MoviesController < ApplicationController
   def index
     movies_query = MoviesQuery.new
     movies = movies_query.by_year(params[:year])
-                          .by_genre(params[:genre])
-                          .by_country(params[:country])
-                          .by_title(params[:title])
-                          .by_description(params[:description])
-                          .by_published_at(params[:published_at])
-                          .call
+                         .by_genre(params[:genre])
+                         .by_country(params[:country])
+                         .by_title(params[:title])
+                         .by_description(params[:description])
+                         .by_published_at(params[:published_at])
+                         .call
 
     render json: movies.as_json(only: [ :id, :title, :genre, :year, :country, :published_at, :description ])
   end
