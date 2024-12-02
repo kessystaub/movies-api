@@ -1,24 +1,14 @@
-# README
+# API de Importação de Filmes
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Esta API permite a importação de filmes através de um arquivo CSV e oferece endpoints para visualizar e filtrar os filmes importados.
 
-Things you may want to cover:
+## Endpoints
 
-* Ruby version
+### 1. Importar Filmes
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- **Método**: POST  
+- **URL**: `http://localhost:3000/movies/import_csv`  
+- **Descrição**: Importa filmes para a base de dados a partir de um arquivo CSV.  
+- **Requisitos**:
+  - O `body` da requisição deve ser do tipo `multipart/form-data`.
+  - O parâmetro deve se chamar `file` e conter o arquivo CSV.
