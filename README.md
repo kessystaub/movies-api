@@ -10,6 +10,7 @@ Use o comando abaixo para clonar o repositório:
 
 ```bash
 git clone https://github.com/kessystaub/movies-api.git
+```
 
 
 ## Endpoints
