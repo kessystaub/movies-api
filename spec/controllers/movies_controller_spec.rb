@@ -37,6 +37,62 @@ RSpec.describe MoviesController, type: :controller do
         json_response = JSON.parse(response.body)
         expect(json_response['message']).to eq('Importação de arquivo CSV realizada com sucesso!')
       end
+      
+      it 'creates the movies according to the file informations' do
+        expect do
+          post :import_csv, params: { file: file }
+        end.to change(Movie, :count).by(1)
+      
+        movie1 = Movie.find_by(show_id: 's64')
+        movie2 = Movie.find_by(show_id: 's66')
+      
+        expect(movie1.title).to eql('Movie 1')
+        expect(movie1.genre).to eql('Crime TV Shows, TV Dramas, TV Mysteries')
+        expect(movie1.year).to eql('2020')
+        expect(movie1.country).to eql('United States')
+        expect(movie1.published_at).to eql(Date.parse('June 5, 2020'))
+        expect(movie1.description).to eql('Description 1.')
+        expect(movie1.show_id).to eql('s64')
+        expect(movie1.movie_type).to eql('TV Show')
+        expect(movie1.director).to be_nil
+        expect(movie1.cast).to eql('Cast 1')
+        expect(movie1.rating).to eql('TV-MA')
+        expect(movie1.duration).to eql('4 Seasons')
+      
+        expect(movie2.title).to eql('Movie 2')
+        expect(movie2.genre).to eql('Horror Movies, Thrillers')
+        expect(movie2.year).to eql('2014')
+        expect(movie2.country).to eql('Brazil')
+        expect(movie2.published_at).to eql(Date.parse('January 13, 2019'))
+        expect(movie2.description).to eql('Description 2.')
+        expect(movie2.show_id).to eql('s66')
+        expect(movie2.movie_type).to eql('Movie')
+        expect(movie2.director).to eql('Daniel Stamm')
+        expect(movie2.cast).to eql('Cast 2')
+        expect(movie2.rating).to eql('R')
+        expect(movie2.duration).to eql('93 min')
+      end
+
+      it 'does not create repeated movies' do
+        Movie.create!(
+          title: 'Movie 2',
+          genre: 'Horror Movies, Thrillers',
+          year: 2014,
+          country: 'Brazil',
+          published_at: Date.parse('January 13, 2019'),
+          description: 'Description 2.',
+          show_id: 's66',
+          movie_type: 'Movie',
+          director: 'Daniel Stamm',
+          cast: 'Cast 2',
+          rating: 'R',
+          duration: '93 min'
+        )
+
+        expect do
+          post :import_csv, params: { file: file }
+        end.to change(Movie, :count).by(1)
+      end
     end
 
     context 'when no file is provided' do
@@ -51,7 +107,7 @@ RSpec.describe MoviesController, type: :controller do
 
     context 'when there is an error during import' do
       before do
-        allow(Movie).to receive(:find_or_create_by!).and_raise(StandardError, 'Erro simulado')
+        allow(Movie).to receive(:find_or_create_by!).and_raise(StandardError, 'Erro')
       end
 
       it 'returns an error message' do
@@ -59,7 +115,7 @@ RSpec.describe MoviesController, type: :controller do
 
         expect(response).to have_http_status(:unprocessable_entity)
         json_response = JSON.parse(response.body)
-        expect(json_response['error']).to eq('Erro ao importar: Erro simulado')
+        expect(json_response['error']).to eq('Erro ao importar: Erro')
       end
     end
   end

@@ -26,7 +26,13 @@ class MoviesController < ApplicationController
             year: row["release_year"],
             country: row["country"],
             published_at: row["date_added"] ? Date.parse(row["date_added"]) : nil,
-            description: row["description"]
+            description: row["description"],
+            show_id: row["show_id"],
+            movie_type: row["type"],
+            director: row["director"],
+            cast: row["cast"],
+            rating: row["rating"],
+            duration: row["duration"],
           )
         end
 

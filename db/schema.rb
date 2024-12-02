@@ -18,6 +18,12 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_28_163030) do
     t.string "country"
     t.date "published_at"
     t.text "description"
+    t.string "show_id"
+    t.string "movie_type"
+    t.string "director"
+    t.string "cast"
+    t.string "rating"
+    t.string "duration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

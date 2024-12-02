@@ -7,6 +7,12 @@ class CreateMovies < ActiveRecord::Migration[7.2]
       t.string :country
       t.date :published_at
       t.text :description
+      t.string :show_id
+      t.string :movie_type
+      t.string :director
+      t.string :cast
+      t.string :rating
+      t.string :duration
 
       t.timestamps
     end
