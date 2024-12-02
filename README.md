@@ -2,6 +2,16 @@
 
 Esta API permite a importação de filmes através de um arquivo CSV e oferece endpoints para visualizar e filtrar os filmes importados.
 
+## Instalação e Execução
+
+### Passo 1: Clone o repositório
+
+Use o comando abaixo para clonar o repositório:
+
+```bash
+git clone https://github.com/kessystaub/movies-api.git
+
+
 ## Endpoints
 
 ### 1. Importar filmes
