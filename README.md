@@ -49,8 +49,6 @@ O servidor estará disponível em http://localhost:3000.
   - O `body` da requisição deve ser do tipo `multipart/form-data`.
   - O parâmetro deve se chamar `file` e conter o arquivo CSV.
 
-## Colunas Suportadas no CSV
-
 A API importa apenas as seguintes colunas do arquivo CSV enviado:
 
 - **`title`**: Título do filme.  
