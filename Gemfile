@@ -31,7 +31,7 @@ gem "bootsnap", require: false
 # gem "rack-cors"
 
 group :development, :test do
-  gem "rspec-rails",               "6.1.4"
+  gem "rspec-rails",               "7.1.0"
   gem "rubocop-factory_bot",       "2.26.1"
   gem "rubocop-rspec_rails",       "2.30.0"
   gem "guard-rspec",               "4.7.3"
