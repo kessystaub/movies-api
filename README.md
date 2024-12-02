@@ -49,15 +49,6 @@ O servidor estará disponível em http://localhost:3000.
   - O `body` da requisição deve ser do tipo `multipart/form-data`.
   - O parâmetro deve se chamar `file` e conter o arquivo CSV.
 
-A API importa apenas as seguintes colunas do arquivo CSV enviado:
-
-- **`title`**: Título do filme.  
-- **`listed_in`**: Gênero do filme.  
-- **`release_year`**: Ano de lançamento.  
-- **`country`**: País.  
-- **`date_added`** Data em que foi adicionado ao catálogo (no formato `YYYY-MM-DD`).  
-- **`description`**: Breve descrição do filme.
-
 ### 2. Listar e filtrar filmes
 
 - **Método**: GET  
