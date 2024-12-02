@@ -11,9 +11,9 @@ RSpec.describe MoviesQuery do
     end
 
     it 'returns the movies list sorted by #published_at' do
-      movie_a = Movie.create!(title: 'Movie A', published_at: Date.new(2022, 1, 1))
-      movie_b = Movie.create!(title: 'Movie B', published_at: Date.new(2020, 1, 1))
-      movie_c = Movie.create!(title: 'Movie C', published_at: Date.new(2021, 1, 1))
+      movie_a = FactoryBot.create(:movie, title: 'Movie A', published_at: Date.new(2022, 1, 1))
+      movie_b = FactoryBot.create(:movie, title: 'Movie B', published_at: Date.new(2020, 1, 1))
+      movie_c = FactoryBot.create(:movie, title: 'Movie C', published_at: Date.new(2021, 1, 1))
 
       sorted_movies = [ movie_b, movie_c, movie_a ]
 
@@ -23,8 +23,8 @@ RSpec.describe MoviesQuery do
 
   describe '#by_year' do
     it 'prepares #call to return only records from the param passed' do
-      movie = Movie.create!(year: '1999')
-      incorrect_movie = Movie.create!(year: '2000')
+      movie = FactoryBot.create(:movie, year: '1999')
+      incorrect_movie = FactoryBot.create(:movie, year: '2000')
 
       result = subject.by_year('1999').call
 
@@ -33,8 +33,8 @@ RSpec.describe MoviesQuery do
     end
 
     it 'is not applied if the param is nil' do
-      movie = Movie.create!(year: '1999')
-      incorrect_movie = Movie.create!(year: '2000')
+      movie = FactoryBot.create(:movie, year: '1999')
+      incorrect_movie = FactoryBot.create(:movie, year: '2000')
 
       result = subject.by_year(nil).call
 
@@ -49,8 +49,8 @@ RSpec.describe MoviesQuery do
 
   describe '#by_genre' do
     it 'prepares #call to return only records from the param passed' do
-      action_movie = Movie.create!(genre: 'Action')
-      comedy_movie = Movie.create!(genre: 'Comedy')
+      action_movie = FactoryBot.create(:movie, genre: 'Action')
+      comedy_movie = FactoryBot.create(:movie, genre: 'Comedy')
 
       result = subject.by_genre('Action').call
 
@@ -59,8 +59,8 @@ RSpec.describe MoviesQuery do
     end
 
     it 'is not applied if the param is nil' do
-      action_movie = Movie.create!(genre: 'Action')
-      comedy_movie = Movie.create!(genre: 'Comedy')
+      action_movie = FactoryBot.create(:movie, genre: 'Action')
+      comedy_movie = FactoryBot.create(:movie, genre: 'Comedy')
 
       result = subject.by_genre(nil).call
 
@@ -75,8 +75,8 @@ RSpec.describe MoviesQuery do
 
   describe '#by_country' do
     it 'prepares #call to return only records from the param passed' do
-      brazil_movie = Movie.create!(country: 'Brazil')
-      mexico_movie = Movie.create!(country: 'Mexico')
+      brazil_movie = FactoryBot.create(:movie, country: 'Brazil')
+      mexico_movie = FactoryBot.create(:movie, country: 'Mexico')
 
       result = subject.by_country('Mexico').call
 
@@ -85,8 +85,8 @@ RSpec.describe MoviesQuery do
     end
 
     it 'is not applied if the param is nil' do
-      brazil_movie = Movie.create!(country: 'Brazil')
-      mexico_movie = Movie.create!(country: 'Mexico')
+      brazil_movie = FactoryBot.create(:movie, country: 'Brazil')
+      mexico_movie = FactoryBot.create(:movie, country: 'Mexico')
 
       result = subject.by_country(nil).call
 
@@ -101,8 +101,8 @@ RSpec.describe MoviesQuery do
 
   describe '#by_title' do
     it 'prepares #call to return only records from the param passed' do
-      movie_with_title = Movie.create!(title: 'Title')
-      movie_with_another_title = Movie.create!(title: 'Another Title')
+      movie_with_title = FactoryBot.create(:movie, title: 'Title')
+      movie_with_another_title = FactoryBot.create(:movie, title: 'Another Title')
 
       result = subject.by_title('Title').call
 
@@ -111,8 +111,8 @@ RSpec.describe MoviesQuery do
     end
 
     it 'is not applied if the param is nil' do
-      movie_with_title = Movie.create!(title: 'Title')
-      movie_with_another_title = Movie.create!(title: 'Another Title')
+      movie_with_title = FactoryBot.create(:movie, title: 'Title')
+      movie_with_another_title = FactoryBot.create(:movie, title: 'Another Title')
 
       result = subject.by_title(nil).call
 
@@ -127,8 +127,8 @@ RSpec.describe MoviesQuery do
 
   describe '#by_description' do
     it 'prepares #call to return only records from the param passed' do
-      movie_with_description = Movie.create!(description: 'Description')
-      movie_with_another_description = Movie.create!(description: 'Another Description')
+      movie_with_description = FactoryBot.create(:movie, description: 'Description')
+      movie_with_another_description = FactoryBot.create(:movie, description: 'Another Description')
 
       result = subject.by_description('Description').call
 
@@ -137,8 +137,8 @@ RSpec.describe MoviesQuery do
     end
 
     it 'is not applied if the param is nil' do
-      movie_with_description = Movie.create!(description: 'Description')
-      movie_with_another_description = Movie.create!(description: 'Another Description')
+      movie_with_description = FactoryBot.create(:movie, description: 'Description')
+      movie_with_another_description = FactoryBot.create(:movie, description: 'Another Description')
 
       result = subject.by_description(nil).call
 
@@ -154,8 +154,8 @@ RSpec.describe MoviesQuery do
   describe '#by_published_at' do
     it 'prepares #call to return only records from the param passed' do
       date = Date.new(2022, 1, 1)
-      movie_with_date = Movie.create!(published_at: date)
-      movie_with_another_date = Movie.create!(published_at: Date.new(2023, 1, 1))
+      movie_with_date = FactoryBot.create(:movie, published_at: date)
+      movie_with_another_date = FactoryBot.create(:movie, published_at: Date.new(2023, 1, 1))
 
       result = subject.by_published_at(date).call
 
@@ -165,8 +165,8 @@ RSpec.describe MoviesQuery do
 
     it 'is not applied if the param is nil' do
       date = Date.new(2022, 1, 1)
-      movie_with_date = Movie.create!(published_at: date)
-      movie_with_another_date = Movie.create!(published_at: Date.new(2023, 1, 1))
+      movie_with_date = FactoryBot.create(:movie, published_at: date)
+      movie_with_another_date = FactoryBot.create(:movie, published_at: Date.new(2023, 1, 1))
 
       result = subject.by_published_at(nil).call
 

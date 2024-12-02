@@ -32,10 +32,7 @@ gem "bootsnap", require: false
 
 group :development, :test do
   gem "rspec-rails",               "6.1.4"
-  gem "rubocop-factory_bot",       "2.26.1"
-  gem "rubocop-rspec_rails",       "2.30.0"
-  gem "guard-rspec",               "4.7.3"
-  gem "spring-commands-rspec",     "1.0.4"
+  gem 'factory_bot_rails'
 
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"

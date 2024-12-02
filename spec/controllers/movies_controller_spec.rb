@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe MoviesController, type: :controller do
   describe 'GET #index' do
-    let!(:movie1) { Movie.create!(title: 'Title1', genre: 'Action', year: 2020, country: 'USA', published_at: '2020-01-01', description: 'Desc1') }
-    let!(:movie2) { Movie.create!(title: 'Title2', genre: 'Comedy', year: 2021, country: 'Canada', published_at: '2021-06-01', description: 'Desc2') }
+    let!(:movie1) { FactoryBot.create(:movie, title: 'Title1', genre: 'Action', year: 2020, country: 'USA', published_at: '2020-01-01', description: 'Desc1') }
+    let!(:movie2) { FactoryBot.create(:movie, title: 'Title2', genre: 'Comedy', year: 2021, country: 'Canada', published_at: '2021-06-01', description: 'Desc2') }
 
     it 'returns filtered movies based on params' do
       get :index, params: { genre: 'Action' }
@@ -41,7 +41,7 @@ RSpec.describe MoviesController, type: :controller do
       it 'creates the movies according to the file informations' do
         expect do
           post :import_csv, params: { file: file }
-        end.to change(Movie, :count).by(1)
+        end.to change(Movie, :count).by(2)
       
         movie1 = Movie.find_by(show_id: 's64')
         movie2 = Movie.find_by(show_id: 's66')
@@ -74,8 +74,7 @@ RSpec.describe MoviesController, type: :controller do
       end
 
       it 'does not create repeated movies' do
-        Movie.create!(
-          title: 'Movie 2',
+        FactoryBot.create(:movie, title: 'Movie 2',
           genre: 'Horror Movies, Thrillers',
           year: 2014,
           country: 'Brazil',
