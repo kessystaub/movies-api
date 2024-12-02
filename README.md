@@ -12,6 +12,31 @@ Use o comando abaixo para clonar o repositório:
 git clone https://github.com/kessystaub/movies-api.git
 ```
 
+### Passo 2: Instale as dependências
+
+Navegue até o diretório do projeto e execute o seguinte comando para instalar as dependências:
+
+```bash
+bundle install
+```
+
+### Passo 3: Configure o banco de dados
+
+Crie e migre o banco de dados com os comandos:
+
+```bash
+rails db:create db:migrate
+```
+
+### Passo 4: Inicie o servidor
+
+Inicie o servidor Rails:
+
+```bash
+rails server
+```
+
+O servidor estará disponível em http://localhost:3000.
 
 ## Endpoints
 
