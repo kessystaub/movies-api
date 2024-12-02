@@ -54,3 +54,4 @@ O servidor estará disponível em http://localhost:3000.
 - **Método**: GET  
 - **URL**: `http://localhost:3000/movies`  
 - **Descrição**: Retorna uma lista de filmes importados. É possível aplicar filtros.
+- **Exemplo de requisição com filtro**: `http://localhost:3000/movies?year=2020&country=Japan`
